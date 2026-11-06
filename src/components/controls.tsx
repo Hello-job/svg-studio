@@ -120,30 +120,39 @@ export function Menu({
   children,
   className = "",
   ariaLabel,
+  iconOnly = false,
+  side = "bottom",
+  contentClassName,
 }: {
   label: ReactNode;
   children: ReactNode;
   className?: string;
   ariaLabel?: string;
+  iconOnly?: boolean;
+  side?: ComponentProps<typeof DropdownMenuContent>["side"];
+  contentClassName?: string;
 }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant={className === "export-trigger" ? "outline" : "ghost"}
-          size="sm"
+          size={iconOnly ? "icon-xs" : "sm"}
           className={cn(
-            "menu-trigger max-sm:gap-1 max-sm:px-1.5 max-sm:text-xs max-sm:has-[>svg]:px-1.5",
+            iconOnly
+              ? "menu-icon-trigger p-0"
+              : "menu-trigger max-sm:gap-1 max-sm:px-1.5 max-sm:text-xs max-sm:has-[>svg]:px-1.5",
             className,
           )}
           aria-label={ariaLabel}
         >
           {label}
-          <ChevronDown size={12} />
+          {!iconOnly && <ChevronDown className="size-3" />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="z-[100] min-w-[210px]"
+        className={cn("z-[100] min-w-[210px]", contentClassName)}
+        side={side}
         sideOffset={6}
         align="start"
         collisionPadding={8}
@@ -174,7 +183,9 @@ export function MenuItem({
       disabled={disabled}
       onSelect={onSelect}
     >
-      <span>{children}</span>
+      <span className="flex min-w-0 items-center gap-2 whitespace-nowrap">
+        {children}
+      </span>
       {shortcut && <DropdownMenuShortcut>{shortcut}</DropdownMenuShortcut>}
     </DropdownMenuItem>
   );

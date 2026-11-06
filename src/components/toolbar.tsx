@@ -60,8 +60,11 @@ export function Toolbar({
           />
           <Menu
             ariaLabel="形状工具"
-            className="shape-menu-trigger"
-            label={<ChevronDown size={10} />}
+            iconOnly
+            side="right"
+            className="shape-menu-trigger w-4"
+            contentClassName="min-w-40"
+            label={<ChevronDown className="size-3" />}
           >
             <MenuItem onSelect={() => tool("rect")} shortcut="R">
               <RectangleHorizontal size={15} />

@@ -65,7 +65,11 @@ export function Inspector({
           )}
         </h1>
         <div className="inspector-title-actions">
-          <Menu ariaLabel="对象更多操作" label={<MoreHorizontal size={17} />}>
+          <Menu
+            iconOnly
+            ariaLabel="对象更多操作"
+            label={<MoreHorizontal size={17} />}
+          >
             <MenuItem onSelect={() => session.canvas.clearSelection()}>
               取消选择
             </MenuItem>

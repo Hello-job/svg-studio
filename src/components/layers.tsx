@@ -31,7 +31,7 @@ export function Layers({
     <section className="layers-panel" aria-label="图层列表">
       <div className="section-heading">
         <h2>图层</h2>
-        <Menu ariaLabel="添加对象" label={<Plus size={16} />}>
+        <Menu iconOnly ariaLabel="添加对象" label={<Plus size={16} />}>
           <MenuItem onSelect={() => session.setTool("rect")}>绘制矩形</MenuItem>
           <MenuItem onSelect={() => session.setTool("ellipse")}>
             绘制椭圆

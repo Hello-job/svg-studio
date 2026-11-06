@@ -329,14 +329,9 @@
   }
   .shape-menu-trigger {
     position: absolute;
-    right: -9px;
-    top: 12px;
-    padding: 0;
-    min-height: 16px;
-    width: 16px;
-  }
-  .shape-menu-trigger > svg:last-child {
-    display: none;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   .rail-colors {
     margin-top: auto;
@@ -559,13 +554,6 @@
   .inspector-title-actions {
     display: flex;
     align-items: center;
-  }
-  .inspector-title .menu-trigger {
-    padding: 0;
-    width: 28px;
-  }
-  .inspector-title .menu-trigger > svg:last-child {
-    display: none;
   }
   .property-scroll {
     flex: 1;
@@ -888,14 +876,6 @@
   .layers-panel .section-heading {
     margin-bottom: 6px;
     padding: 0 4px;
-  }
-  .layers-panel .menu-trigger {
-    width: 24px;
-    padding: 0;
-    min-height: 24px;
-  }
-  .layers-panel .menu-trigger > svg:last-child {
-    display: none;
   }
   .layers-list {
     overflow: auto;
@@ -1236,7 +1216,7 @@
       height: 34px;
     }
     .shape-menu-trigger {
-      right: -5px;
+      right: -8px;
     }
     .inspector {
       position: absolute;
