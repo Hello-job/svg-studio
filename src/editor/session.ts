@@ -1,6 +1,6 @@
 import SvgCanvas from "@svgedit/svgcanvas";
 import { blankSvg, prepareSvg, SAMPLE_SVG } from "./documents";
-import { readLayers, readSelection } from "./selection";
+import { elementMatrix, readLayers, readSelection } from "./selection";
 import type { CanvasEngine, Command, EditorSnapshot, Tool } from "./types";
 
 export class EditorSession {
@@ -282,7 +282,6 @@ export class EditorSession {
     if (!this.snapshot.selected) return;
     if (name === "opacity") this.canvas.setOpacity(value / 100);
     else if (name === "radius") this.canvas.setRectRadius(value);
-    else if (name === "rotation") this.canvas.setRotationAngle(value);
     else if (name === "blur") this.canvas.setBlur(value);
     else if (name === "strokeWidth") this.canvas.setStrokeWidth(value);
     else if (name === "fontSize") this.canvas.setFontSize(value);
@@ -295,9 +294,13 @@ export class EditorSession {
     const element = this.canvas.getSelectedElements()[0];
     if (!selected || !element) return;
     const { x, y, width, height } = selected;
-    const matrix =
-      element.transform.baseVal.consolidate()?.matrix ?? new DOMMatrix();
+    const matrix = elementMatrix(element);
     let change = new DOMMatrix();
+    if (name === "rotation")
+      change = change
+        .translate(x + width / 2, y + height / 2)
+        .rotate(value - selected.rotation)
+        .translate(-x - width / 2, -y - height / 2);
     if (name === "x") change = change.translate(value - x, 0);
     if (name === "y") change = change.translate(0, value - y);
     if (name === "width" && width > 0 && value > 0)

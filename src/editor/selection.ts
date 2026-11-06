@@ -18,11 +18,20 @@ export function elementName(element: Element) {
     element.getAttribute("data-name") || NAMES[element.localName] || "图形"
   );
 }
+export function elementMatrix(element: SVGGraphicsElement): DOMMatrix {
+  const transforms = element.transform.baseVal;
+  let result = new DOMMatrix();
+  for (let index = 0; index < transforms.numberOfItems; index++) {
+    const { a, b, c, d, e, f } = transforms.getItem(index).matrix;
+    result = result.multiply(new DOMMatrix([a, b, c, d, e, f]));
+  }
+  return result;
+}
 export function readSelection(canvas: CanvasEngine): Selection | null {
   const element = canvas.getSelectedElements().find((item) => item !== null);
   if (!element) return null;
   const box = element.getBBox();
-  const matrix = element.transform.baseVal.consolidate()?.matrix;
+  const matrix = elementMatrix(element);
   let bounds = { x: box.x, y: box.y, width: box.width, height: box.height };
   if (matrix) {
     const corners = [
@@ -59,7 +68,7 @@ export function readSelection(canvas: CanvasEngine): Selection | null {
     linejoin: attr("stroke-linejoin", "miter"),
     opacity: Number(attr("opacity", "1")) * 100,
     radius: Number(attr("rx", "0")),
-    rotation: canvas.getRotationAngle(element),
+    rotation: (Math.atan2(matrix.b, matrix.a) * 180) / Math.PI,
     blur: Number(canvas.getBlur(element)) || 0,
     text: element.textContent ?? "",
     fontFamily: attr("font-family", "Arial, sans-serif"),
