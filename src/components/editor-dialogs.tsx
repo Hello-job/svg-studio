@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Button } from "./ui/button";
+import { Textarea } from "./ui/textarea";
 import { Dialog } from "./dialog";
 import { NumberField } from "./controls";
 import type { EditorSession } from "../editor/session";
@@ -39,7 +41,7 @@ export function EditorDialogs({
         description="编辑矢量内容。应用前会检查格式并移除脚本与外部资源。"
         wide
       >
-        <textarea
+        <Textarea
           className="source-editor"
           aria-label="SVG 源码"
           value={source}
@@ -47,11 +49,11 @@ export function EditorDialogs({
           spellCheck={false}
         />
         <div className="dialog-footer">
-          <button className="secondary-button" onClick={() => setDialog(null)}>
+          <Button variant="outline" size="sm" onClick={() => setDialog(null)}>
             取消
-          </button>
-          <button
-            className="primary-button"
+          </Button>
+          <Button
+            size="sm"
             onClick={() =>
               run(() => {
                 session?.load(source);
@@ -61,7 +63,7 @@ export function EditorDialogs({
             }
           >
             应用修改
-          </button>
+          </Button>
         </div>
       </Dialog>
       <Dialog
@@ -91,11 +93,11 @@ export function EditorDialogs({
           />
         </div>
         <div className="dialog-footer">
-          <button className="secondary-button" onClick={() => setDialog(null)}>
+          <Button variant="outline" size="sm" onClick={() => setDialog(null)}>
             取消
-          </button>
-          <button
-            className="primary-button"
+          </Button>
+          <Button
+            size="sm"
             onClick={() =>
               run(() => {
                 session?.newDocument(newWidth, newHeight);
@@ -106,7 +108,7 @@ export function EditorDialogs({
             }
           >
             创建画布
-          </button>
+          </Button>
         </div>
       </Dialog>
       <Dialog
@@ -148,21 +150,22 @@ export function EditorDialogs({
         description="当前作品尚未下载保存。继续操作会替换当前内容；你也可以先取消并保存 SVG。"
       >
         <div className="dialog-footer">
-          <button
-            className="secondary-button"
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => setConfirmation(null)}
           >
             取消
-          </button>
-          <button
-            className="primary-button"
+          </Button>
+          <Button
+            size="sm"
             onClick={() => {
               confirmation?.action();
               setConfirmation(null);
             }}
           >
             继续
-          </button>
+          </Button>
         </div>
       </Dialog>
     </>

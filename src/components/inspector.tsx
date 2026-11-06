@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Button } from "./ui/button";
+import { Textarea } from "./ui/textarea";
 import {
   AlignStartVertical,
   AlignCenterVertical,
@@ -195,18 +197,22 @@ export function Inspector({
               </div>
               {state.selectedIds.length >= 3 && (
                 <div className="distribute-row">
-                  <button
+                  <Button
+                    variant="ghost"
+                    size="sm"
                     className="text-button"
                     onClick={() => run(() => session.align("dh", relative))}
                   >
                     水平分布
-                  </button>
-                  <button
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
                     className="text-button"
                     onClick={() => run(() => session.align("dv", relative))}
                   >
                     垂直分布
-                  </button>
+                  </Button>
                 </div>
               )}
             </section>
@@ -301,7 +307,7 @@ export function Inspector({
                 <div className="section-heading">
                   <h2>文字</h2>
                 </div>
-                <textarea
+                <Textarea
                   aria-label="文字内容"
                   key={selected.id + ":" + selected.text}
                   defaultValue={selected.text}

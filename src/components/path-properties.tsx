@@ -1,3 +1,4 @@
+import { Button } from "./ui/button";
 import type { EditorSession } from "../editor/session";
 
 export function PathProperties({
@@ -19,38 +20,48 @@ export function PathProperties({
           : "点击画布中的路径开始编辑节点。"}
       </p>
       <div className="node-actions">
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           disabled={!active}
           onClick={() => run(() => session.canvas.pathActions.clonePathNode())}
         >
           添加节点
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
           disabled={!active}
           onClick={() => run(() => session.canvas.pathActions.deletePathNode())}
         >
           删除节点
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
           disabled={!active}
           onClick={() => run(() => session.canvas.pathActions.setSegType(4))}
         >
           直线节点
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
           disabled={!active}
           onClick={() => run(() => session.canvas.pathActions.setSegType(6))}
         >
           曲线节点
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
           disabled={!active}
           onClick={() =>
             run(() => session.canvas.pathActions.opencloseSubPath())
           }
         >
           闭合 / 打开路径
-        </button>
+        </Button>
       </div>
     </section>
   );

@@ -1,7 +1,11 @@
-import * as RadixDialog from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
 import type { ReactNode } from "react";
-import { IconButton } from "./controls";
+import {
+  Dialog as DialogRoot,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "./ui/dialog";
 
 export function Dialog({
   open,
@@ -19,22 +23,18 @@ export function Dialog({
   wide?: boolean;
 }) {
   return (
-    <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
-      <RadixDialog.Portal>
-        <RadixDialog.Overlay className="dialog-overlay" />
-        <RadixDialog.Content
-          className={`dialog-content${wide ? " dialog-wide" : ""}`}
-        >
-          <div className="dialog-header">
-            <RadixDialog.Title>{title}</RadixDialog.Title>
-            <RadixDialog.Close asChild>
-              <IconButton icon={X} label="关闭弹窗" />
-            </RadixDialog.Close>
-          </div>
-          <RadixDialog.Description>{description}</RadixDialog.Description>
-          {children}
-        </RadixDialog.Content>
-      </RadixDialog.Portal>
-    </RadixDialog.Root>
+    <DialogRoot open={open} onOpenChange={onOpenChange}>
+      <DialogContent
+        className={`z-[301] block max-h-[calc(100dvh-40px)] overflow-auto ${wide ? "sm:max-w-[860px]" : "sm:max-w-[440px]"}`}
+      >
+        <DialogHeader className="text-left">
+          <DialogTitle className="pr-6 text-base">{title}</DialogTitle>
+          <DialogDescription className="text-[13px] leading-relaxed">
+            {description}
+          </DialogDescription>
+        </DialogHeader>
+        {children}
+      </DialogContent>
+    </DialogRoot>
   );
 }

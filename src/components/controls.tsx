@@ -2,12 +2,24 @@ import { useRef, useState } from "react";
 import type { ComponentProps, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
-import * as Dropdown from "@radix-ui/react-dropdown-menu";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { NativeSelect } from "./ui/native-select";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+} from "./ui/dropdown-menu";
+import { cn } from "../lib/utils";
 
 export function IconButton({
   icon: Icon,
   label,
   active,
+  className,
   ...props
 }: Omit<ComponentProps<"button">, "children"> & {
   icon: LucideIcon;
@@ -15,16 +27,23 @@ export function IconButton({
   active?: boolean;
 }) {
   return (
-    <button
+    <Button
       type="button"
-      className={`icon-button${active ? " is-active" : ""}`}
+      variant="ghost"
+      size="icon-sm"
+      className={cn(
+        "icon-button text-muted-foreground",
+        active &&
+          "is-active bg-primary/15 text-[var(--theme-highlight)] hover:bg-primary/20 hover:text-[var(--theme-highlight)]",
+        className,
+      )}
       title={label}
       aria-label={label}
       aria-pressed={active}
       {...props}
     >
       <Icon size={17} strokeWidth={1.7} />
-    </button>
+    </Button>
   );
 }
 
@@ -69,7 +88,8 @@ export function NumberField({
     <label className={`number-field${disabled ? " is-disabled" : ""}`}>
       <span>{label}</span>
       <div>
-        <input
+        <Input
+          className="h-full rounded-none border-0 bg-transparent px-2 text-[13px] shadow-none focus-visible:ring-0 dark:bg-transparent"
           type="number"
           step="1"
           aria-label={label}
@@ -107,25 +127,30 @@ export function Menu({
   ariaLabel?: string;
 }) {
   return (
-    <Dropdown.Root>
-      <Dropdown.Trigger
-        className={`menu-trigger ${className}`}
-        aria-label={ariaLabel}
-      >
-        {label}
-        <ChevronDown size={12} />
-      </Dropdown.Trigger>
-      <Dropdown.Portal>
-        <Dropdown.Content
-          className="menu-content"
-          sideOffset={6}
-          align="start"
-          collisionPadding={8}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant={className === "export-trigger" ? "outline" : "ghost"}
+          size="sm"
+          className={cn(
+            "menu-trigger max-sm:gap-1 max-sm:px-1.5 max-sm:text-xs max-sm:has-[>svg]:px-1.5",
+            className,
+          )}
+          aria-label={ariaLabel}
         >
-          {children}
-        </Dropdown.Content>
-      </Dropdown.Portal>
-    </Dropdown.Root>
+          {label}
+          <ChevronDown size={12} />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        className="z-[100] min-w-[210px]"
+        sideOffset={6}
+        align="start"
+        collisionPadding={8}
+      >
+        {children}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
 
@@ -143,19 +168,20 @@ export function MenuItem({
   danger?: boolean;
 }) {
   return (
-    <Dropdown.Item
-      className={`menu-item${danger ? " danger" : ""}`}
+    <DropdownMenuItem
+      className="justify-between gap-6"
+      variant={danger ? "destructive" : "default"}
       disabled={disabled}
       onSelect={onSelect}
     >
       <span>{children}</span>
-      {shortcut && <span className="shortcut">{shortcut}</span>}
-    </Dropdown.Item>
+      {shortcut && <DropdownMenuShortcut>{shortcut}</DropdownMenuShortcut>}
+    </DropdownMenuItem>
   );
 }
 
 export function MenuSeparator() {
-  return <Dropdown.Separator className="menu-separator" />;
+  return <DropdownMenuSeparator />;
 }
 
 export function Select({
@@ -170,13 +196,15 @@ export function Select({
   children: ReactNode;
 }) {
   return (
-    <select
+    <NativeSelect
+      size="sm"
+      className="h-[30px] px-2 py-1 pr-7 text-xs"
       aria-label={label}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >
       {children}
-    </select>
+    </NativeSelect>
   );
 }
 
@@ -220,7 +248,8 @@ export function ColorField({
             onChange={(e) => onCommit(e.target.value)}
           />
         </label>
-        <input
+        <Input
+          className="h-full rounded-none border-0 bg-transparent p-0 text-xs shadow-none focus-visible:ring-0 dark:bg-transparent"
           aria-label={`${label}色值`}
           value={draft ?? value.toUpperCase()}
           onChange={(e) => setDraft(e.target.value)}

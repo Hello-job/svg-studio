@@ -1,3 +1,4 @@
+import { Input } from "./ui/input";
 import { useState } from "react";
 import {
   Eye,
@@ -69,10 +70,10 @@ export function Layers({
                 {editing === layer.id ? null : <span>{layer.name}</span>}
               </button>
               {editing === layer.id && (
-                <input
+                <Input
                   autoFocus
                   aria-label="图层名称"
-                  className="layer-name-input"
+                  className="layer-name-input absolute h-6 w-auto px-1 text-xs"
                   defaultValue={layer.name}
                   onBlur={(e) => {
                     run(() => session.rename(layer.id, e.target.value));

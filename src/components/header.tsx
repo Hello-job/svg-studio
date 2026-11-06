@@ -3,13 +3,15 @@ import {
   Upload,
   Undo2,
   Redo2,
-  Spline,
   PanelRight,
   CircleHelp,
 } from "lucide-react";
 import { IconButton, Menu, MenuItem, MenuSeparator } from "./controls";
 import type { EditorSession } from "../editor/session";
 import type { Command, EditorSnapshot } from "../editor/types";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { ThemeSettings } from "./theme-settings";
 
 export interface FileActions {
   open(): void;
@@ -52,13 +54,8 @@ export function Header({
   return (
     <>
       <header className="app-header">
-        <a className="brand" href="./" aria-label="SVG Studio">
-          <Spline size={23} strokeWidth={2.5} />
-          <span>SVG Studio</span>
-        </a>
-        <span className="header-divider" />
-        <input
-          className="document-name"
+        <Input
+          className="document-name h-8 w-[230px] border-transparent bg-transparent shadow-none hover:border-input max-sm:w-[120px] max-sm:flex-1 dark:bg-transparent"
           aria-label="文件名"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -67,14 +64,17 @@ export function Header({
           }}
         />
         <div className="header-actions">
-          <button
-            className="secondary-button import-button"
+          <ThemeSettings />
+          <Button
+            variant="outline"
+            size="sm"
+            className="import-button hidden sm:inline-flex"
             onClick={actions.open}
             disabled={!session}
           >
             <Upload size={16} />
             <span>导入</span>
-          </button>
+          </Button>
           <Menu
             label={
               <>
@@ -89,14 +89,15 @@ export function Header({
             <MenuSeparator />
             <MenuItem onSelect={actions.source}>查看 / 编辑 SVG 源码</MenuItem>
           </Menu>
-          <button
+          <Button
+            size="sm"
             className="primary-button"
             onClick={actions.save}
             disabled={!session}
           >
             <Download size={16} />
             <span>保存 SVG</span>
-          </button>
+          </Button>
         </div>
       </header>
       <nav className="menu-bar" aria-label="编辑器菜单">
@@ -254,6 +255,7 @@ export function Header({
           <IconButton
             icon={CircleHelp}
             label="键盘快捷键"
+            className="max-sm:hidden"
             onClick={actions.help}
           />
           <IconButton
