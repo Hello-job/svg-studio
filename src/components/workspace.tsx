@@ -48,6 +48,20 @@ export function Workspace({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
+    const stage = viewportRef.current;
+    if (!stage || !session) return;
+    const wheel = (event: WheelEvent) => {
+      if (!event.ctrlKey && !event.metaKey) return;
+      event.preventDefault();
+      session.zoomTo(
+        session.getSnapshot().zoom * (event.deltaY > 0 ? 0.95 : 1.05),
+      );
+    };
+    // React 的 wheel 监听默认为 passive，这里需要阻止浏览器整页缩放。
+    stage.addEventListener("wheel", wheel, { passive: false });
+    return () => stage.removeEventListener("wheel", wheel);
+  }, [session, viewportRef]);
+  useEffect(() => {
     const down = (event: KeyboardEvent) => {
       const target = event.target;
       if (
@@ -191,12 +205,6 @@ export function Workspace({
         }}
         onPointerCancel={() => {
           pan.current = null;
-        }}
-        onWheel={(event) => {
-          if (event.ctrlKey || event.metaKey) {
-            event.preventDefault();
-            session?.zoomTo(state.zoom * (event.deltaY > 0 ? 0.95 : 1.05));
-          }
         }}
         onDragOver={(event) => event.preventDefault()}
       >
