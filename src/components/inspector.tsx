@@ -24,6 +24,7 @@ import {
   MenuItem,
   NumberField,
   Select,
+  SelectOption,
 } from "./controls";
 import { Layers } from "./layers";
 import { PathProperties } from "./path-properties";
@@ -182,11 +183,12 @@ export function Inspector({
                 <h2>对齐</h2>
                 <Select
                   label="对齐参照"
+                  className="w-auto max-w-[125px]"
                   value={relative}
                   onChange={setRelative}
                 >
-                  <option value="page">相对画布</option>
-                  <option value="selected">相对选区</option>
+                  <SelectOption value="page">相对画布</SelectOption>
+                  <SelectOption value="selected">相对选区</SelectOption>
                 </Select>
               </div>
               <div className="alignment-row">
@@ -244,15 +246,16 @@ export function Inspector({
                 />
                 <Select
                   label="描边线型"
+                  className="w-[93px] shrink-0"
                   value={selected.dash}
                   onChange={(v) =>
                     run(() => session.attribute("stroke-dasharray", v))
                   }
                 >
-                  <option value="none">实线</option>
-                  <option value="8,4">虚线</option>
-                  <option value="2,4">点线</option>
-                  <option value="12,4,2,4">点划线</option>
+                  <SelectOption value="none">实线</SelectOption>
+                  <SelectOption value="8,4">虚线</SelectOption>
+                  <SelectOption value="2,4">点线</SelectOption>
+                  <SelectOption value="12,4,2,4">点划线</SelectOption>
                 </Select>
               </div>
               <details className="disclosure">
@@ -267,9 +270,9 @@ export function Inspector({
                         run(() => session.attribute("stroke-linecap", v))
                       }
                     >
-                      <option value="butt">平头</option>
-                      <option value="round">圆头</option>
-                      <option value="square">方头</option>
+                      <SelectOption value="butt">平头</SelectOption>
+                      <SelectOption value="round">圆头</SelectOption>
+                      <SelectOption value="square">方头</SelectOption>
                     </Select>
                   </label>
                   <label>
@@ -281,9 +284,9 @@ export function Inspector({
                         run(() => session.attribute("stroke-linejoin", v))
                       }
                     >
-                      <option value="miter">尖角</option>
-                      <option value="round">圆角</option>
-                      <option value="bevel">斜角</option>
+                      <SelectOption value="miter">尖角</SelectOption>
+                      <SelectOption value="round">圆角</SelectOption>
+                      <SelectOption value="bevel">斜角</SelectOption>
                     </Select>
                   </label>
                 </div>
@@ -323,9 +326,9 @@ export function Inspector({
                   value={selected.fontFamily}
                   onChange={(v) => run(() => session.setFont(v))}
                 >
-                  <option value={selected.fontFamily}>
+                  <SelectOption value={selected.fontFamily}>
                     {selected.fontFamily}
-                  </option>
+                  </SelectOption>
                   {[
                     "Arial, sans-serif",
                     "Georgia, serif",
@@ -334,9 +337,9 @@ export function Inspector({
                   ]
                     .filter((font) => font !== selected.fontFamily)
                     .map((font) => (
-                      <option key={font} value={font}>
+                      <SelectOption key={font} value={font}>
                         {font}
-                      </option>
+                      </SelectOption>
                     ))}
                 </Select>
                 <div className="property-row">

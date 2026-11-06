@@ -214,7 +214,7 @@ export function App() {
       const editingField =
         target instanceof Element &&
         target.closest(
-          "input,textarea,select,[contenteditable=true],[role=menu]",
+          "input,textarea,select,[contenteditable=true],[role=menu],[role=combobox],[role=listbox]",
         );
       if (editingField && shortcut?.kind !== "file") return;
       if (editingField && target instanceof HTMLElement) target.blur();

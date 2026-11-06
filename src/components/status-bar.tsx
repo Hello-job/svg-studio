@@ -1,6 +1,5 @@
 import { Maximize, Minus, Plus, Monitor } from "lucide-react";
-import { IconButton } from "./controls";
-import { NativeSelect } from "./ui/native-select";
+import { IconButton, Select, SelectOption } from "./controls";
 import type { EditorSession } from "../editor/session";
 import type { EditorSnapshot } from "../editor/types";
 
@@ -71,21 +70,21 @@ export function StatusBar({
           disabled={state.zoom <= 0.1}
           onClick={() => session?.zoomTo(state.zoom / 1.2)}
         />
-        <NativeSelect
-          size="sm"
-          className="h-7 w-[76px] border-0 bg-transparent pl-2 pr-7 text-xs shadow-none dark:bg-transparent"
-          aria-label="缩放比例"
-          value={state.zoom}
-          onChange={(e) => session?.zoomTo(Number(e.target.value))}
+        <Select
+          side="top"
+          className="w-[76px] border-0 bg-transparent px-2 text-xs shadow-none data-[size=sm]:h-7 dark:bg-transparent"
+          label="缩放比例"
+          value={String(state.zoom)}
+          onChange={(value) => session?.zoomTo(Number(value))}
         >
           {[...new Set([0.25, 0.5, 0.75, 1, 1.5, 2, 4, state.zoom])]
             .sort((a, b) => a - b)
             .map((zoom) => (
-              <option value={zoom} key={zoom}>
+              <SelectOption value={String(zoom)} key={zoom}>
                 {Math.round(zoom * 100)}%
-              </option>
+              </SelectOption>
             ))}
-        </NativeSelect>
+        </Select>
         <IconButton
           icon={Plus}
           label="放大"

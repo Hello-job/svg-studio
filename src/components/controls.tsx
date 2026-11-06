@@ -4,7 +4,13 @@ import type { LucideIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { NativeSelect } from "./ui/native-select";
+import {
+  Select as SelectRoot,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -200,24 +206,43 @@ export function Select({
   value,
   onChange,
   children,
+  className,
+  side = "bottom",
 }: {
   label: string;
   value: string;
   onChange(value: string): void;
   children: ReactNode;
+  className?: string;
+  side?: ComponentProps<typeof SelectContent>["side"];
 }) {
   return (
-    <NativeSelect
-      size="sm"
-      className="h-[30px] px-2 py-1 pr-7 text-xs"
-      aria-label={label}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    >
-      {children}
-    </NativeSelect>
+    <SelectRoot value={value} onValueChange={onChange}>
+      <SelectTrigger
+        size="sm"
+        className={cn(
+          "w-full min-w-0 px-2 text-xs data-[size=sm]:h-[30px]",
+          className,
+        )}
+        aria-label={label}
+      >
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent
+        aria-label={label}
+        position="popper"
+        side={side}
+        align="end"
+        collisionPadding={8}
+        className="z-[150]"
+      >
+        {children}
+      </SelectContent>
+    </SelectRoot>
   );
 }
+
+export { SelectItem as SelectOption };
 
 function asHex(value: string) {
   if (/^#[\da-f]{6}$/i.test(value)) return value;
