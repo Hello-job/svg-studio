@@ -5,9 +5,9 @@
 [![CI](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-受 [GPT Image 2.6 的 SVG 输出能力](https://developers.openai.com/api/docs/guides/image-generation#generate-svg-output)启发，我们做了 SVG Studio：把 AI 生成的图标、插画导入浏览器，继续改色、调整形状、编辑路径，再导出用于项目。让生成后的局部修改也能更顺手。
+受 GPT Image 2.6 的 [SVG 输出能力](https://developers.openai.com/api/docs/guides/image-generation#generate-svg-output)启发，我们做了 SVG Studio：把 AI 生成的图标、插画导入浏览器，继续改色、调整形状、编辑路径，再导出用于项目。让生成后的局部修改也能更顺手。
 
-独立的浏览器 SVG 编辑器，基于 **React + TypeScript + SVG-Edit + shadcn/ui**。默认黑白深色界面，文件在本地处理，无需登录或后端。
+可通过 shadcn CLI 安装的 React SVG 编辑组件，基于 **React + TypeScript + SVG-Edit + shadcn/ui**。默认黑白深色界面，文件在本地处理，无需登录或后端。
 
 ![SVG Studio](docs/qa/desktop.jpg)
 
@@ -20,20 +20,6 @@
 - **对象与图层**：组合、排序、对齐、显隐、锁定、重命名、撤销/重做。
 - **文件与视图**：SVG 导入/源码编辑、SVG/PNG 导出、缩放、平移、标尺。
 - **主题**：默认黑白，可选预设色或自定义 HEX，偏好保存在当前浏览器。
-
-## 本地运行
-
-需要 Node.js 22.12+（推荐 24）和 pnpm 11。
-
-```sh
-git clone https://github.com/Hello-job/svg-studio.git
-cd svg-studio
-corepack enable
-pnpm install --frozen-lockfile
-pnpm dev
-```
-
-打开 [http://127.0.0.1:4317/](http://127.0.0.1:4317/)。左侧绘图、右侧改属性，Shift 多选，空格/H 平移；帮助按钮可查看快捷键。
 
 ## 安装 React 组件
 
@@ -55,20 +41,23 @@ import { SvgStudio } from "@/components/svg-studio";
 />;
 ```
 
-`editorUrl` 可替换为自己的部署地址。安装的是组件与通信协议源码；完整编辑器在 iframe 内运行，隔离样式和引擎生命周期，支持多实例和重复挂载。`defaultValue` 设置初始 SVG，`value / onChange` 支持受控编辑，`onReady / onError` 返回载入结果。传入 `onSave` 后由宿主处理保存，否则直接下载。输入上限 5 MB，组件不读写独立编辑器的本机草稿。详见[接入说明](docs/engine.md)。
+安装的是组件与通信协议源码；完整编辑器在 iframe 内运行，隔离样式和引擎生命周期，支持多实例和重复挂载。`editorUrl` 可配置为其他兼容编辑器地址。
 
-## 部署
-
-```sh
-pnpm build
-pnpm preview
-```
-
-Vercel 导入此仓库即可，已提供 `vercel.json`：Vite、`pnpm build`、输出 `dist/`，无需环境变量或后端。首页直接编辑，`/install.html` 提供安装命令和实时组件示例，`/r/svg-studio.json` 是公开 Registry。构建也会重新生成 Registry，源码与下载内容保持一致。
-
-也可用静态服务器托管 `dist/`。子目录部署使用 `pnpm build --base=/svg-studio/`。
+`defaultValue` 设置初始 SVG，`value / onChange` 支持受控编辑，`onReady / onError` 返回载入结果。传入 `onSave` 后由宿主处理保存，否则直接下载。输入上限 5 MB，组件不读写独立编辑器的本机草稿。详见[接入说明](docs/engine.md)。
 
 ## 开发与贡献
+
+需要 Node.js 22.12+（推荐 24）和 pnpm 11。
+
+```sh
+git clone https://github.com/Hello-job/svg-studio.git
+cd svg-studio
+corepack enable
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+本地示例地址：[http://127.0.0.1:4317/](http://127.0.0.1:4317/)。提交前运行：
 
 ```sh
 pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm build
