@@ -1,6 +1,6 @@
 # SVG Studio
 
-[简体中文](README.md) · [Sample SVG](src/editor/sample.svg) · [Known issues](docs/known-issues.md) · [Engine integration](docs/engine.md)
+[Try online](https://svg-studio-rho.vercel.app/) · [Component docs](https://svg-studio-rho.vercel.app/install.html) · [简体中文](README.md) · [Sample SVG](src/editor/sample.svg) · [Known issues](docs/known-issues.md) · [Engine integration](docs/engine.md)
 
 [![CI](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -40,7 +40,7 @@ Open [http://127.0.0.1:4317/](http://127.0.0.1:4317/). Draw on the left, edit pr
 In a React project with shadcn/ui and Tailwind CSS configured:
 
 ```sh
-pnpm dlx shadcn@latest add https://raw.githubusercontent.com/Hello-job/svg-studio/main/public/r/svg-studio.json
+pnpm dlx shadcn@latest add https://svg-studio-rho.vercel.app/r/svg-studio.json
 ```
 
 ```tsx
@@ -48,14 +48,14 @@ pnpm dlx shadcn@latest add https://raw.githubusercontent.com/Hello-job/svg-studi
 import { SvgStudio } from "@/components/svg-studio";
 
 <SvgStudio
-  editorUrl="https://your-svg-studio.vercel.app/"
+  editorUrl="https://svg-studio-rho.vercel.app/"
   filename="design.svg"
   onChange={(svg) => console.log(svg)}
   onSave={({ svg, filename }) => console.log(filename, svg)}
 />;
 ```
 
-Set `editorUrl` to your deployment. The CLI installs the component and protocol source; the full editor runs in an iframe to isolate styles and engine lifetime, supporting multiple instances and remounting. Use `defaultValue` for initial SVG, `value / onChange` for controlled editing, and `onReady / onError` for loading results. With `onSave`, the host handles saving; otherwise SVG is downloaded. Input limit: 5 MB. Embedded editors do not read or write standalone drafts. See [engine integration](docs/engine.md).
+You can replace `editorUrl` with your deployment. The CLI installs the component and protocol source; the full editor runs in an iframe to isolate styles and engine lifetime, supporting multiple instances and remounting. Use `defaultValue` for initial SVG, `value / onChange` for controlled editing, and `onReady / onError` for loading results. With `onSave`, the host handles saving; otherwise SVG is downloaded. Input limit: 5 MB. Embedded editors do not read or write standalone drafts. See [engine integration](docs/engine.md).
 
 ## Deploy
 

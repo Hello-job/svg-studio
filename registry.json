@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "svg-studio",
-  "homepage": "https://github.com/Hello-job/svg-studio",
+  "homepage": "https://svg-studio-rho.vercel.app/install.html",
   "items": [
     {
       "name": "svg-studio",

@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/Hello-job/svg-studio/issues"
   },
-  "homepage": "https://github.com/Hello-job/svg-studio#readme",
+  "homepage": "https://svg-studio-rho.vercel.app/",
   "engines": {
     "node": ">=22.12.0"
   },

@@ -1,6 +1,6 @@
 # SVG Studio
 
-[English](README.en.md) · [示例 SVG](src/editor/sample.svg) · [已知问题](docs/known-issues.md) · [引擎接入](docs/engine.md)
+[在线使用](https://svg-studio-rho.vercel.app/) · [组件文档](https://svg-studio-rho.vercel.app/install.html) · [English](README.en.md) · [示例 SVG](src/editor/sample.svg) · [已知问题](docs/known-issues.md) · [引擎接入](docs/engine.md)
 
 [![CI](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -40,7 +40,7 @@ pnpm dev
 在已配置 shadcn/ui 和 Tailwind CSS 的 React 项目中执行：
 
 ```sh
-pnpm dlx shadcn@latest add https://raw.githubusercontent.com/Hello-job/svg-studio/main/public/r/svg-studio.json
+pnpm dlx shadcn@latest add https://svg-studio-rho.vercel.app/r/svg-studio.json
 ```
 
 ```tsx
@@ -48,14 +48,14 @@ pnpm dlx shadcn@latest add https://raw.githubusercontent.com/Hello-job/svg-studi
 import { SvgStudio } from "@/components/svg-studio";
 
 <SvgStudio
-  editorUrl="https://your-svg-studio.vercel.app/"
+  editorUrl="https://svg-studio-rho.vercel.app/"
   filename="design.svg"
   onChange={(svg) => console.log(svg)}
   onSave={({ svg, filename }) => console.log(filename, svg)}
 />;
 ```
 
-`editorUrl` 使用自己的部署地址。安装的是组件与通信协议源码；完整编辑器在 iframe 内运行，隔离样式和引擎生命周期，支持多实例和重复挂载。`defaultValue` 设置初始 SVG，`value / onChange` 支持受控编辑，`onReady / onError` 返回载入结果。传入 `onSave` 后由宿主处理保存，否则直接下载。输入上限 5 MB，组件不读写独立编辑器的本机草稿。详见[接入说明](docs/engine.md)。
+`editorUrl` 可替换为自己的部署地址。安装的是组件与通信协议源码；完整编辑器在 iframe 内运行，隔离样式和引擎生命周期，支持多实例和重复挂载。`defaultValue` 设置初始 SVG，`value / onChange` 支持受控编辑，`onReady / onError` 返回载入结果。传入 `onSave` 后由宿主处理保存，否则直接下载。输入上限 5 MB，组件不读写独立编辑器的本机草稿。详见[接入说明](docs/engine.md)。
 
 ## 部署
 
