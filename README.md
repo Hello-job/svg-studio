@@ -5,6 +5,8 @@
 [![CI](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+受 [GPT Image 2.6 的 SVG 输出能力](https://developers.openai.com/api/docs/guides/image-generation#generate-svg-output)启发，我们做了 SVG Studio：把 AI 生成的图标、插画导入浏览器，继续改色、调整形状、编辑路径，再导出用于项目。让生成后的局部修改也能更顺手。
+
 一个可自行部署的浏览器 SVG 编辑器。使用 **React + TypeScript + SVG-Edit**，界面采用 **shadcn/ui 默认黑白主题**，保留紧凑的工具栏、属性面板和图层列表。
 
 打开 SVG、编辑图形与路径、调整外观，再下载 SVG 或 PNG。文件在浏览器中处理，无需登录，不需要后端；文档草稿与主题偏好保存在当前浏览器。

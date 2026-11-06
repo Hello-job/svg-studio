@@ -5,6 +5,8 @@
 [![CI](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+Inspired by [GPT Image 2.6's SVG output](https://developers.openai.com/api/docs/guides/image-generation#generate-svg-output), we built SVG Studio to make the next step easier: import AI-generated icons and illustrations, refine colors, shapes, and paths in the browser, then export them for your project.
+
 A self-hostable SVG editor built with **React, TypeScript, and SVG-Edit**, using **shadcn/ui's default monochrome dark theme**. A compact toolbar, contextual inspector, and object list keep the canvas in focus.
 
 Open an SVG, edit shapes and paths, then download SVG or PNG. Files are processed in the browser. No account, API key, database, or backend is required. The latest draft and theme preferences are stored in the current browser.
