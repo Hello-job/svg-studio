@@ -50,21 +50,21 @@ export function Toolbar({
         ))}
       </div>
       <div className="tool-group">
-        <div className="shape-tool">
+        <div className="shape-tool" role="group" aria-label="形状绘图">
           <IconButton
             icon={state.tool === "ellipse" ? Circle : RectangleHorizontal}
-            label="矩形 · R"
+            label={state.tool === "ellipse" ? "椭圆 · O" : "矩形 · R"}
             active={state.tool === "rect" || state.tool === "ellipse"}
             disabled={!session}
-            onClick={() => tool("rect")}
+            onClick={() => tool(state.tool === "ellipse" ? "ellipse" : "rect")}
           />
           <Menu
             ariaLabel="形状工具"
             iconOnly
             side="right"
-            className="shape-menu-trigger w-4"
+            className="shape-menu-trigger size-3 rounded-sm text-muted-foreground hover:bg-transparent dark:hover:bg-transparent"
             contentClassName="min-w-40"
-            label={<ChevronDown className="size-3" />}
+            label={<ChevronDown className="size-2" />}
           >
             <MenuItem onSelect={() => tool("rect")} shortcut="R">
               <RectangleHorizontal size={15} />

@@ -327,11 +327,16 @@
   .shape-tool {
     position: relative;
   }
+  .shape-tool:has(.shape-menu-trigger:hover) > .icon-button:not(.is-active),
+  .shape-tool:has(.shape-menu-trigger[data-state="open"])
+    > .icon-button:not(.is-active) {
+    background: var(--hover);
+    color: var(--text);
+  }
   .shape-menu-trigger {
     position: absolute;
-    right: -12px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 0;
+    bottom: 0;
   }
   .rail-colors {
     margin-top: auto;
@@ -1173,9 +1178,6 @@
     .tool-rail .icon-button {
       width: 34px;
       height: 34px;
-    }
-    .shape-menu-trigger {
-      right: -8px;
     }
     .inspector {
       position: absolute;
