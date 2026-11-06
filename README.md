@@ -1,6 +1,6 @@
 # SVG Studio
 
-[English](README.en.md) · [已知问题](docs/known-issues.md) · [引擎接入](docs/engine.md)
+[English](README.en.md) · [示例 SVG](src/editor/sample.svg) · [已知问题](docs/known-issues.md) · [引擎接入](docs/engine.md)
 
 [![CI](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Hello-job/svg-studio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)

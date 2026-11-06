@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <g id="artwork" class="layer">
+    <title>Take it slow</title>
+    <rect id="paper" width="800" height="600" fill="#f0edf9" data-name="淡紫背景" data-locked="true"/>
+    <g id="window" data-name="落日窗景">
+      <path id="window-frame" d="M461 279V166a112 112 0 0 1 224 0v113Z" fill="#d5d0ee"/>
+      <path id="window-sky" d="M473 267V166a100 100 0 0 1 200 0v101Z" fill="#ffd995"/>
+      <circle id="sun" cx="583" cy="163" r="38" fill="#f28770" data-name="落日"/>
+      <path id="distant-hill" d="M473 231c36-31 66-30 103-8 34 20 63 18 97-10v54H473Z" fill="#e6aa9f"/>
+      <path id="near-hill" d="M473 255c47-31 79-25 113-9 37 18 60 12 87-2v23H473Z" fill="#ad8bae"/>
+      <path id="window-cross" d="M573 67v200M473 198h200" fill="none" stroke="#f0edf9" stroke-width="8"/>
+      <rect id="window-sill" x="451" y="267" width="244" height="12" rx="6" fill="#d5d0ee"/>
+    </g>
+    <ellipse id="floor-shadow" cx="447" cy="526" rx="253" ry="18" fill="#dfdaee" data-name="地面投影"/>
+    <g id="armchair" data-name="蓝色扶手椅">
+      <path id="chair-legs" d="m398 471-13 52h22l21-52Zm206 0 21 52h22l-13-52Z" fill="#343264" data-name="椅脚"/>
+      <path id="chair-back" d="M378 424V307c0-72 63-107 143-107s145 36 145 107v117Z" fill="#5063d8" data-name="椅背"/>
+      <path id="chair-seam" d="M408 368v-57c0-53 44-81 112-81 66 0 115 28 115 81v57" fill="none" stroke="#8490e7" stroke-width="3" stroke-linecap="round" data-name="椅背缝线"/>
+      <rect id="chair-seat" x="360" y="420" width="323" height="65" rx="32" fill="#3e4fb7" data-name="坐垫"/>
+      <path id="chair-arms" d="M365 392c0-16 11-27 26-27s27 11 27 27v53h-26c-16 0-27-12-27-27Zm264 0c0-16 11-27 27-27s27 11 27 27v26c0 15-11 27-27 27h-27Z" fill="#6879e1" data-name="扶手"/>
+      <path id="chair-piping" d="M416 450h213" fill="none" stroke="#8490e7" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g id="plant" data-name="橡皮树盆栽">
+      <path id="plant-stems" d="M219 462c0-58 1-115-15-171m13 109c-14-26-36-41-56-52m57 22c21-29 35-52 42-81m-43 145c22-21 45-33 68-37" fill="none" stroke="#306451" stroke-width="5" stroke-linecap="round"/>
+      <path id="leaf-top" d="M205 323c-37-15-49-44-41-74 34 5 58 37 41 74Z" fill="#3f8068"/>
+      <path id="leaf-right" d="M228 354c-9-41 12-71 48-81 7 39-10 67-48 81Z" fill="#75a58a"/>
+      <path id="leaf-left" d="M196 389c-42 6-73-12-80-47 43-11 72 10 80 47Z" fill="#75a58a"/>
+      <path id="leaf-low" d="M229 432c5-36 34-60 71-55-5 36-32 61-71 55Z" fill="#3f8068"/>
+      <path id="leaf-veins" d="m202 310-22-39m55 67 29-40m-81 79-44-24m105 69 39-31" fill="none" stroke="#b3cfaa" stroke-width="2" stroke-linecap="round"/>
+      <path id="plant-pot" d="m171 449 13 64c2 10 13 15 35 15s33-5 35-15l13-64Z" fill="#e89882" data-name="花盆"/>
+      <path id="pot-stripes" d="m191 461 8 53m20-53v56m28-56-8 53" fill="none" stroke="#f8c4ac" stroke-width="7" stroke-linecap="round"/>
+      <rect id="pot-rim" x="165" y="443" width="108" height="20" rx="8" fill="#f2ac95"/>
+    </g>
+    <g id="cat" data-name="熟睡的橘猫" fill="#f4a261">
+      <path id="cat-body" d="M427 397c-1-45 27-85 82-91 57-7 106 13 125 55 10 22 6 45-15 58-27 17-67 20-114 18l-66-2Z" data-name="猫咪身体"/>
+      <path id="cat-patch" d="M494 389c17-21 52-23 73-5 16 13 20 29 19 48-31 6-65 7-94 4Z" fill="#ffd59e" data-name="肚皮"/>
+      <path id="cat-tail" d="M611 362c39-9 58 14 44 41-11 23-45 29-75 23" fill="none" stroke="#f4a261" stroke-width="26" stroke-linecap="round" data-name="卷尾巴"/>
+      <path id="tail-tip" d="M655 385c-1 8-5 14-11 19" fill="none" stroke="#d47a44" stroke-width="26" stroke-linecap="butt"/>
+      <path id="cat-stripes" d="M514 307c-4 20 0 35 13 47 6-18 6-35 3-48Zm41 1c-4 20 0 35 13 48 7-18 6-33 1-45Zm42 13c-7 16-5 32 5 45 9-12 11-24 8-36Z" fill="#d47a44" data-name="背部花纹"/>
+      <path id="cat-head" d="m382 350-5-46c-1-9 3-12 10-7l35 26c15-4 28-3 41 3l29-19c7-5 11-1 8 8l-12 44c5 9 8 19 6 31-4 27-30 43-61 43-34 0-59-17-60-44-1-15 3-28 9-39Z" data-name="猫咪脑袋"/>
+      <path id="cat-ears" d="m387 311 5 32 19-11Zm88 23 14-14-7 26Z" fill="#df8a68" data-name="耳朵"/>
+      <path id="cat-forehead" d="m421 324 9 24 9-24Zm22 0 8 23 8-21Z" fill="#d47a44"/>
+      <path id="cat-muzzle" d="M410 399c-6-13 2-23 17-18 8 3 11 3 18 0 16-5 23 6 17 18-7 13-44 14-52 0Z" fill="#ffdfb2"/>
+      <path id="sleepy-eyes" d="M397 371q9 9 18 0m39 0q9 9 18 0" fill="none" stroke="#593a35" stroke-width="3.5" stroke-linecap="round" data-name="弯弯的睡眼"/>
+      <path id="cat-nose" d="M430 385h10q3 0 1 3l-4 4q-2 2-4 0l-4-4q-2-3 1-3Z" fill="#a85d56"/>
+      <path id="cat-smile" d="M435 392v5m-7 0q7 6 14 0" fill="none" stroke="#593a35" stroke-width="2" stroke-linecap="round"/>
+      <path id="whiskers" d="m400 389-19-4m18 11-19 2m88-9 18-4m-17 11 19 2" fill="none" stroke="#a86548" stroke-width="2" stroke-linecap="round"/>
+      <path id="cat-paws" d="M412 414c-8 0-12 5-10 11 2 7 15 10 29 9h29c11 0 15-4 14-10-2-8-13-12-23-10l-13 3c-8-3-18-4-26-3Z" fill="#ffd59e" data-name="小爪子"/>
+      <path id="paw-lines" d="m416 423 1 7m9-7 1 8m25-8 1 7m9-7 1 6" fill="none" stroke="#d59967" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <text id="heading" x="54" y="111" font-family="Arial, sans-serif" font-size="78" font-weight="bold" letter-spacing="-4" fill="#343264" data-name="标题 · Take it">Take it</text>
+    <text id="subheading" x="51" y="187" font-family="Arial, sans-serif" font-size="92" font-weight="bold" letter-spacing="-5" fill="#343264" data-name="标题 · slow">slow.</text>
+    <text id="sleep-mark" x="349" y="284" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#9990b9" transform="rotate(-12 349 284)" data-name="呼噜声">z</text>
+    <text id="caption" x="56" y="567" font-family="Arial, sans-serif" font-size="15" fill="#756e94" data-name="海报说明">A little pause. A softer pace.</text>
+  </g>
+</svg>

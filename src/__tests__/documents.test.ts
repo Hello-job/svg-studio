@@ -6,7 +6,12 @@ const parse = (source: string) =>
 describe("SVG 导入边界", () => {
   it("保留可编辑图形、图层名称、锁定信息与原始尺寸", () => {
     const svg = parse(SAMPLE_SVG);
-    expect(svg.querySelectorAll("rect,circle,path,text")).toHaveLength(6);
+    expect(svg.querySelector("#cat")?.getAttribute("data-name")).toBe(
+      "熟睡的橘猫",
+    );
+    expect(svg.querySelector("#cat-body")?.localName).toBe("path");
+    expect(svg.querySelector("#heading")?.textContent).toBe("Take it");
+    expect(svg.querySelector("image")).toBeNull();
     expect(svg.querySelector("g")?.classList.contains("layer")).toBe(true);
     expect(svg.querySelector("#paper")?.getAttribute("data-locked")).toBe(
       "true",

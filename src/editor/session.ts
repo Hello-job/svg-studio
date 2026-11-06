@@ -50,7 +50,9 @@ export class EditorSession {
     for (const event of ["changed", "sourcechanged"]) {
       this.canvas.bind(event, () => this.refresh(true));
     }
-    const initial = this.canvas.getSvgContent().querySelector("#rounded-rect");
+    const initial = source
+      ? null
+      : this.canvas.getSvgContent().querySelector("#cat");
     if (initial) this.canvas.selectOnly([initial], true);
     this.refresh(false);
   }

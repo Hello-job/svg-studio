@@ -15,14 +15,14 @@ export function StatusBar({
   run(action: () => void): void;
 }) {
   const colors = [
-    "#faf6ee",
+    "#f0edf9",
     "#f4a261",
-    "#132c50",
-    "#f0e7d8",
-    "#e8d9bf",
-    "#8ba4a0",
+    "#5063d8",
+    "#ffd59e",
+    "#e89882",
+    "#3f8068",
     "#f5f5f5",
-    "#202020",
+    "#343264",
   ];
   return (
     <footer className="status-bar">

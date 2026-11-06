@@ -43,7 +43,7 @@ export function App() {
     session?.subscribe ?? subscribeEmpty,
     session?.getSnapshot ?? getEmpty,
   );
-  const [name, setName] = useState("图形设计.svg");
+  const [name, setName] = useState("take-it-slow.svg");
   const [rulers, setRulers] = useState(true),
     [checker, setChecker] = useState(false),
     [inspector, setInspector] = useState(true);
