@@ -13,16 +13,24 @@ import {
 } from "../lib/theme";
 import type { ThemeSettings as Preferences } from "../lib/theme";
 
-export function ThemeSettings() {
-  const [settings, setSettings] = useState(readTheme);
+export function ThemeSettings({ persist = true }: { persist?: boolean }) {
+  const [settings, setSettings] = useState(() =>
+    persist ? readTheme() : DEFAULT_THEME,
+  );
   const [hex, setHex] = useState(settings.customColor);
   const [invalid, setInvalid] = useState(false);
   const [persistent, setPersistent] = useState(true);
+  let persistenceLabel = "设置仅在当前组件内生效";
+  if (persist)
+    persistenceLabel = persistent
+      ? "设置保存在此浏览器"
+      : "存储不可用，仅本次生效";
 
   const update = (next: Preferences) => {
     setSettings(next);
     setInvalid(false);
     applyTheme(next);
+    if (!persist) return;
     try {
       localStorage.setItem(THEME_KEY, JSON.stringify(next));
       setPersistent(true);
@@ -140,7 +148,7 @@ export function ThemeSettings() {
         </div>
         <div className="flex items-center justify-between border-t pt-3">
           <span className="text-xs text-muted-foreground">
-            {persistent ? "设置保存在此浏览器" : "存储不可用，仅本次生效"}
+            {persistenceLabel}
           </span>
           <Button
             variant="ghost"

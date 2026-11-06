@@ -35,16 +35,38 @@ pnpm dev
 
 打开 [http://127.0.0.1:4317/](http://127.0.0.1:4317/)。左侧绘图、右侧改属性，Shift 多选，空格/H 平移；帮助按钮可查看快捷键。
 
-## 构建与嵌入
+## 安装 React 组件
+
+在已配置 shadcn/ui 和 Tailwind CSS 的 React 项目中执行：
+
+```sh
+pnpm dlx shadcn@latest add https://raw.githubusercontent.com/Hello-job/svg-studio/main/public/r/svg-studio.json
+```
+
+```tsx
+"use client";
+import { SvgStudio } from "@/components/svg-studio";
+
+<SvgStudio
+  editorUrl="https://your-svg-studio.vercel.app/"
+  filename="design.svg"
+  onChange={(svg) => console.log(svg)}
+  onSave={({ svg, filename }) => console.log(filename, svg)}
+/>;
+```
+
+`editorUrl` 使用自己的部署地址。安装的是组件与通信协议源码；完整编辑器在 iframe 内运行，隔离样式和引擎生命周期，支持多实例和重复挂载。`defaultValue` 设置初始 SVG，`value / onChange` 支持受控编辑，`onReady / onError` 返回载入结果。传入 `onSave` 后由宿主处理保存，否则直接下载。输入上限 5 MB，组件不读写独立编辑器的本机草稿。详见[接入说明](docs/engine.md)。
+
+## 部署
 
 ```sh
 pnpm build
 pnpm preview
 ```
 
-构建产物为 `dist/`，可由静态服务器托管。子目录部署使用 `pnpm build --base=/svg-studio/`。
+Vercel 导入此仓库即可，已提供 `vercel.json`：Vite、`pnpm build`、输出 `dist/`，无需环境变量或后端。首页直接编辑，`/install.html` 提供安装命令和实时组件示例，`/r/svg-studio.json` 是公开 Registry。构建也会重新生成 Registry，源码与下载内容保持一致。
 
-当前是独立应用源码，可部署后通过 iframe 嵌入，尚未提供 npm 组件或宿主通信 API。直接接入 React 项目前请阅读[引擎说明](docs/engine.md)：当前页面仅支持一个引擎实例。
+也可用静态服务器托管 `dist/`。子目录部署使用 `pnpm build --base=/svg-studio/`。
 
 ## 开发与贡献
 

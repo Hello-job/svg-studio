@@ -8,6 +8,8 @@ import { Inspector } from "./components/inspector";
 import { StatusBar } from "./components/status-bar";
 import { EditorDialogs } from "./components/editor-dialogs";
 import { IconButton } from "./components/controls";
+import { connectEmbed } from "./editor/embed";
+import type { EmbedContext } from "./editor/embed";
 import { downloadBlob, downloadPng, prepareSvg } from "./editor/documents";
 import { readDraft, saveDraft } from "./editor/draft";
 import { shortcutFor } from "./editor/shortcuts";
@@ -32,7 +34,7 @@ const INITIAL: EditorSnapshot = {
 const subscribeEmpty = () => () => {};
 const getEmpty = () => INITIAL;
 
-export function App() {
+export function App({ embed = null }: { embed?: EmbedContext | null }) {
   const hostRef = useRef<HTMLDivElement>(null),
     viewportRef = useRef<HTMLDivElement>(null),
     textRef = useRef<HTMLInputElement>(null),
@@ -44,6 +46,8 @@ export function App() {
     session?.getSnapshot ?? getEmpty,
   );
   const [name, setName] = useState("take-it-slow.svg");
+  const nameRef = useRef(name);
+  const bridgeRef = useRef<ReturnType<typeof connectEmbed> | null>(null);
   const [rulers, setRulers] = useState(true),
     [checker, setChecker] = useState(false),
     [inspector, setInspector] = useState(true);
@@ -89,7 +93,7 @@ export function App() {
         initialized.current = true;
         let draft = null;
         try {
-          draft = readDraft();
+          draft = embed ? null : readDraft();
           if (draft) prepareSvg(draft.svg);
         } catch {
           draft = null;
@@ -121,11 +125,33 @@ export function App() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [embed]);
+
+  useEffect(() => {
+    nameRef.current = name;
+    bridgeRef.current?.notify();
+  }, [name]);
+
+  useEffect(() => {
+    if (!embed || !session) return;
+    const bridge = connectEmbed(embed, session, {
+      getFilename: () => nameRef.current,
+      setFilename: setName,
+      fit: () => {
+        const viewport = viewportRef.current;
+        if (viewport) session.fit(viewport.clientWidth, viewport.clientHeight);
+      },
+    });
+    bridgeRef.current = bridge;
+    return () => {
+      bridge.dispose();
+      bridgeRef.current = null;
+    };
+  }, [embed, session]);
 
   useEffect(() => {
     document.title = `${name}${state.dirty ? " *" : ""} · SVG Studio`;
-    if (!session || !state.dirty) return;
+    if (!session || !state.dirty || embed) return;
     const timeout = window.setTimeout(() => {
       try {
         saveDraft({ name, svg: session.serialize() });
@@ -137,16 +163,16 @@ export function App() {
       }
     }, 700);
     return () => window.clearTimeout(timeout);
-  }, [name, state.revision, state.dirty, session]);
+  }, [name, state.revision, state.dirty, session, embed]);
 
   useEffect(() => {
-    if (!state.dirty) return;
+    if (!state.dirty || embed) return;
     const leave = (event: BeforeUnloadEvent) => {
       event.preventDefault();
     };
     window.addEventListener("beforeunload", leave);
     return () => window.removeEventListener("beforeunload", leave);
-  }, [state.dirty]);
+  }, [state.dirty, embed]);
 
   useEffect(() => {
     if (!notice || notice.error) return;
@@ -167,13 +193,21 @@ export function App() {
       run(() => {
         if (!session) return;
         const svg = session.serialize();
-        downloadBlob(
-          new Blob([svg], { type: "image/svg+xml;charset=utf-8" }),
-          filename(),
-        );
-        saveDraft({ name: filename(), svg });
+        const intercepted = bridgeRef.current?.save({
+          svg,
+          filename: filename(),
+        });
+        if (!intercepted) {
+          downloadBlob(
+            new Blob([svg], { type: "image/svg+xml;charset=utf-8" }),
+            filename(),
+          );
+        }
+        if (!embed) saveDraft({ name: filename(), svg });
         session.markSaved();
-        setNotice({ message: "SVG 已下载" });
+        setNotice({
+          message: intercepted ? "SVG 已交给宿主保存" : "SVG 已下载",
+        });
       }),
     png: () => {
       if (!session) return;
@@ -282,6 +316,7 @@ export function App() {
       }}
     >
       <Header
+        embedded={Boolean(embed)}
         session={session}
         state={state}
         name={name}

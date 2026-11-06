@@ -5,6 +5,7 @@ import {
   Redo2,
   PanelRight,
   CircleHelp,
+  Code2,
 } from "lucide-react";
 import { IconButton, Menu, MenuItem, MenuSeparator } from "./controls";
 import type { EditorSession } from "../editor/session";
@@ -23,6 +24,7 @@ export interface FileActions {
   fit(): void;
 }
 export function Header({
+  embedded = false,
   session,
   state,
   name,
@@ -36,6 +38,7 @@ export function Header({
   inspector,
   setInspector,
 }: {
+  embedded?: boolean;
   session: EditorSession | null;
   state: EditorSnapshot;
   name: string;
@@ -51,6 +54,7 @@ export function Header({
 }) {
   const command = (id: Command) => run(() => session?.command(id));
   const selected = state.selectedIds.length > 0;
+  const modifiedStatus = embedded ? "已修改" : "已修改 · 草稿保存在本机";
   return (
     <>
       <header className="app-header">
@@ -64,7 +68,20 @@ export function Header({
           }}
         />
         <div className="header-actions">
-          <ThemeSettings />
+          {!embedded && (
+            <Button variant="ghost" size="icon-sm" asChild>
+              <a
+                href={`${import.meta.env.BASE_URL}install.html`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="安装 React 组件"
+                title="安装 React 组件"
+              >
+                <Code2 />
+              </a>
+            </Button>
+          )}
+          <ThemeSettings persist={!embedded} />
           <Button
             variant="outline"
             size="sm"
@@ -249,7 +266,7 @@ export function Header({
           <span
             className={state.dirty ? "status-dot modified" : "status-dot"}
           />
-          {state.dirty ? "已修改 · 草稿保存在本机" : "就绪"}
+          {state.dirty ? modifiedStatus : "就绪"}
         </span>
         <div className="menu-end">
           <IconButton

@@ -19,7 +19,8 @@
   "packageManager": "pnpm@11.17.0",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "tsc -b && vite build",
+    "build": "pnpm registry:build && tsc -b && vite build",
+    "registry:build": "shadcn build && prettier public/r --write",
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -55,6 +56,7 @@
     "globals": "^16.4.0",
     "jsdom": "^26.1.0",
     "prettier": "^3.8.3",
+    "shadcn": "4.23.0",
     "tailwindcss": "^4.3.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.1",

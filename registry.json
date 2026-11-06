@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "svg-studio",
+  "homepage": "https://github.com/Hello-job/svg-studio",
+  "items": [
+    {
+      "name": "svg-studio",
+      "type": "registry:component",
+      "title": "SVG Studio",
+      "description": "An isolated SVG editor with controlled values, change events and save callbacks. Requires an editorUrl pointing to an SVG Studio deployment.",
+      "files": [
+        {
+          "path": "src/components/svg-studio.tsx",
+          "type": "registry:component",
+          "target": "@components/svg-studio.tsx"
+        },
+        {
+          "path": "src/lib/svg-studio-protocol.ts",
+          "type": "registry:lib",
+          "target": "@lib/svg-studio-protocol.ts"
+        }
+      ]
+    }
+  ]
+}

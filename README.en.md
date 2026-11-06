@@ -35,16 +35,38 @@ pnpm dev
 
 Open [http://127.0.0.1:4317/](http://127.0.0.1:4317/). Draw on the left, edit properties on the right, Shift-click for multiple selection, and hold Space or use H to pan. The help button lists shortcuts.
 
-## Build and embed
+## Install the React component
+
+In a React project with shadcn/ui and Tailwind CSS configured:
+
+```sh
+pnpm dlx shadcn@latest add https://raw.githubusercontent.com/Hello-job/svg-studio/main/public/r/svg-studio.json
+```
+
+```tsx
+"use client";
+import { SvgStudio } from "@/components/svg-studio";
+
+<SvgStudio
+  editorUrl="https://your-svg-studio.vercel.app/"
+  filename="design.svg"
+  onChange={(svg) => console.log(svg)}
+  onSave={({ svg, filename }) => console.log(filename, svg)}
+/>;
+```
+
+Set `editorUrl` to your deployment. The CLI installs the component and protocol source; the full editor runs in an iframe to isolate styles and engine lifetime, supporting multiple instances and remounting. Use `defaultValue` for initial SVG, `value / onChange` for controlled editing, and `onReady / onError` for loading results. With `onSave`, the host handles saving; otherwise SVG is downloaded. Input limit: 5 MB. Embedded editors do not read or write standalone drafts. See [engine integration](docs/engine.md).
+
+## Deploy
 
 ```sh
 pnpm build
 pnpm preview
 ```
 
-Serve the generated `dist/` directory with a static server. For a subdirectory, use `pnpm build --base=/svg-studio/`.
+Import this repository into Vercel. `vercel.json` configures Vite, `pnpm build`, and the `dist/` output; no environment variables or backend are required. The homepage is the editor, `/install.html` contains installation instructions and a live component example, and `/r/svg-studio.json` is the public registry item. Builds regenerate the registry from its source.
 
-This is standalone application source, not an npm component library. You can host it and embed it in an iframe; there is no host messaging API yet. Read the [engine notes](docs/engine.md) before direct React integration: only one engine instance is supported per page.
+You can also serve `dist/` with a static server. For a subdirectory, use `pnpm build --base=/svg-studio/`.
 
 ## Development and contributing
 
